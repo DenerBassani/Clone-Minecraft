@@ -33,63 +33,167 @@ global.triangle_buffer = vertex_create_buffer();
 
 
 // ========================================
-// CRIAR TRIÂNGULO
+// CRIAR CUBO
 // ========================================
 
+global.cube_buffer = vertex_create_buffer();
+
 vertex_begin(
-    global.triangle_buffer,
+    global.cube_buffer,
     global.vertex_format
 );
 
 
-// Vértice 1
-vertex_position_3d(
-    global.triangle_buffer,
-    -1,
-    -1,
-    0
-);
+// ========================================
+// FACE DA FRENTE
+// ========================================
 
-vertex_colour(
-    global.triangle_buffer,
-    c_red,
-    1
-);
+// Triângulo 1
+vertex_position_3d(global.cube_buffer, -1, -1,  1);
+vertex_colour(global.cube_buffer, c_red, 1);
 
+vertex_position_3d(global.cube_buffer,  1, -1,  1);
+vertex_colour(global.cube_buffer, c_red, 1);
 
-// Vértice 2
-vertex_position_3d(
-    global.triangle_buffer,
-    1,
-    -1,
-    0
-);
-
-vertex_colour(
-    global.triangle_buffer,
-    c_green,
-    1
-);
+vertex_position_3d(global.cube_buffer,  1,  1,  1);
+vertex_colour(global.cube_buffer, c_red, 1);
 
 
-// Vértice 3
-vertex_position_3d(
-    global.triangle_buffer,
-    0,
-    1,
-    0
-);
+// Triângulo 2
+vertex_position_3d(global.cube_buffer, -1, -1,  1);
+vertex_colour(global.cube_buffer, c_red, 1);
 
-vertex_colour(
-    global.triangle_buffer,
-    c_blue,
-    1
-);
+vertex_position_3d(global.cube_buffer,  1,  1,  1);
+vertex_colour(global.cube_buffer, c_red, 1);
+
+vertex_position_3d(global.cube_buffer, -1,  1,  1);
+vertex_colour(global.cube_buffer, c_red, 1);
 
 
-// Finalizar buffer
+// ========================================
+// FACE DE TRÁS
+// ========================================
+
+// Triângulo 1
+vertex_position_3d(global.cube_buffer,  1, -1, -1);
+vertex_colour(global.cube_buffer, c_green, 1);
+
+vertex_position_3d(global.cube_buffer, -1, -1, -1);
+vertex_colour(global.cube_buffer, c_green, 1);
+
+vertex_position_3d(global.cube_buffer, -1,  1, -1);
+vertex_colour(global.cube_buffer, c_green, 1);
+
+
+// Triângulo 2
+vertex_position_3d(global.cube_buffer,  1, -1, -1);
+vertex_colour(global.cube_buffer, c_green, 1);
+
+vertex_position_3d(global.cube_buffer, -1,  1, -1);
+vertex_colour(global.cube_buffer, c_green, 1);
+
+vertex_position_3d(global.cube_buffer,  1,  1, -1);
+vertex_colour(global.cube_buffer, c_green, 1);
+
+
+// ========================================
+// FACE ESQUERDA
+// ========================================
+
+vertex_position_3d(global.cube_buffer, -1, -1, -1);
+vertex_colour(global.cube_buffer, c_blue, 1);
+
+vertex_position_3d(global.cube_buffer, -1, -1,  1);
+vertex_colour(global.cube_buffer, c_blue, 1);
+
+vertex_position_3d(global.cube_buffer, -1,  1,  1);
+vertex_colour(global.cube_buffer, c_blue, 1);
+
+
+vertex_position_3d(global.cube_buffer, -1, -1, -1);
+vertex_colour(global.cube_buffer, c_blue, 1);
+
+vertex_position_3d(global.cube_buffer, -1,  1,  1);
+vertex_colour(global.cube_buffer, c_blue, 1);
+
+vertex_position_3d(global.cube_buffer, -1,  1, -1);
+vertex_colour(global.cube_buffer, c_blue, 1);
+
+
+// ========================================
+// FACE DIREITA
+// ========================================
+
+vertex_position_3d(global.cube_buffer, 1, -1,  1);
+vertex_colour(global.cube_buffer, c_yellow, 1);
+
+vertex_position_3d(global.cube_buffer, 1, -1, -1);
+vertex_colour(global.cube_buffer, c_yellow, 1);
+
+vertex_position_3d(global.cube_buffer, 1,  1, -1);
+vertex_colour(global.cube_buffer, c_yellow, 1);
+
+
+vertex_position_3d(global.cube_buffer, 1, -1,  1);
+vertex_colour(global.cube_buffer, c_yellow, 1);
+
+vertex_position_3d(global.cube_buffer, 1,  1, -1);
+vertex_colour(global.cube_buffer, c_yellow, 1);
+
+vertex_position_3d(global.cube_buffer, 1,  1,  1);
+vertex_colour(global.cube_buffer, c_yellow, 1);
+
+
+// ========================================
+// FACE DE CIMA
+// ========================================
+
+vertex_position_3d(global.cube_buffer, -1, 1,  1);
+vertex_colour(global.cube_buffer, c_white, 1);
+
+vertex_position_3d(global.cube_buffer, 1, 1,  1);
+vertex_colour(global.cube_buffer, c_white, 1);
+
+vertex_position_3d(global.cube_buffer, 1, 1, -1);
+vertex_colour(global.cube_buffer, c_white, 1);
+
+
+vertex_position_3d(global.cube_buffer, -1, 1,  1);
+vertex_colour(global.cube_buffer, c_white, 1);
+
+vertex_position_3d(global.cube_buffer, 1, 1, -1);
+vertex_colour(global.cube_buffer, c_white, 1);
+
+vertex_position_3d(global.cube_buffer, -1, 1, -1);
+vertex_colour(global.cube_buffer, c_white, 1);
+
+
+// ========================================
+// FACE DE BAIXO
+// ========================================
+
+vertex_position_3d(global.cube_buffer, -1, -1, -1);
+vertex_colour(global.cube_buffer, c_black, 1);
+
+vertex_position_3d(global.cube_buffer, 1, -1, -1);
+vertex_colour(global.cube_buffer, c_black, 1);
+
+vertex_position_3d(global.cube_buffer, 1, -1,  1);
+vertex_colour(global.cube_buffer, c_black, 1);
+
+
+vertex_position_3d(global.cube_buffer, -1, -1, -1);
+vertex_colour(global.cube_buffer, c_black, 1);
+
+vertex_position_3d(global.cube_buffer, 1, -1,  1);
+vertex_colour(global.cube_buffer, c_black, 1);
+
+vertex_position_3d(global.cube_buffer, -1, -1,  1);
+vertex_colour(global.cube_buffer, c_black, 1);
+
+
 vertex_end(
-    global.triangle_buffer
+    global.cube_buffer
 );
 
 
@@ -160,3 +264,5 @@ view_camera[0] = global.camera;
 
 gpu_set_ztestenable(true);
 gpu_set_zwriteenable(true);
+
+global.cube_rotation = 0;
