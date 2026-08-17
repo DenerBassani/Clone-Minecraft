@@ -1,10 +1,10 @@
 // ========================================
-// CÂMERA DO PLAYER
+// CÂMERA DO PLAYER LOCAL
 // ========================================
 
-var player = instance_find(obj_player, 0);
+var player = global.local_player;
 
-if (player != noone)
+if (instance_exists(player))
 {
     var view_matrix = matrix_build_lookat(
         player.player_x,
