@@ -1,8 +1,5 @@
-// ========================================
-// PROJEÇÃO
-// ========================================
-
-var aspect = display_get_width() / display_get_height();
+var aspect = camera_get_view_width(view_camera[0])
+           / camera_get_view_height(view_camera[0]);
 
 var projection = matrix_build_projection_perspective_fov(
     60,
@@ -11,37 +8,30 @@ var projection = matrix_build_projection_perspective_fov(
     100
 );
 
+var yaw = degtorad(cam_yaw);
+var pitch = degtorad(cam_pitch);
 
-// ========================================
-// CÂMERA
-// ========================================
+var look_x = cam_x + sin(yaw) * cos(pitch);
+var look_y = cam_y + sin(pitch);
+var look_z = cam_z + cos(yaw) * cos(pitch);
 
 var view = matrix_build_lookat(
-    0, 0, -5,
-    0, 0, 0,
-    0, 1, 0
+    cam_x,
+    cam_y,
+    cam_z,
+    look_x,
+    look_y,
+    look_z,
+    0,
+    1,
+    0
 );
 
-
-// ========================================
-// MUNDO
-// ========================================
-
 var world = matrix_build_identity();
-
-
-// ========================================
-// APLICAR MATRIZES
-// ========================================
 
 matrix_set(matrix_projection, projection);
 matrix_set(matrix_view, view);
 matrix_set(matrix_world, world);
-
-
-// ========================================
-// DESENHAR
-// ========================================
 
 vertex_submit(
     block,
