@@ -1,7 +1,26 @@
-draw_set_colour(c_white);
+// ========================================
+// RENDERIZAÇÃO 3D
+// ========================================
 
-draw_text(
-    32,
-    32,
-    "Minecraft Clone"
+draw_clear(c_black);
+
+
+// ========================================
+// MATRIZ DO MUNDO
+// ========================================
+
+matrix_set(
+    matrix_world,
+    matrix_build_identity()
+);
+
+
+// ========================================
+// DESENHAR TRIÂNGULO
+// ========================================
+
+vertex_submit(
+    global.triangle_buffer,
+    pr_trianglelist,
+    -1
 );
