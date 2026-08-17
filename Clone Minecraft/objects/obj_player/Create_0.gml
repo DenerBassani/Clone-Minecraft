@@ -42,3 +42,15 @@ window_mouse_set(
     mouse_center_x,
     mouse_center_y
 );
+
+// ========================================
+// FÍSICA VERTICAL
+// ========================================
+
+vertical_velocity = 0;
+
+gravity = 0.01;
+
+jump_force = 0.18;
+
+grounded = false;

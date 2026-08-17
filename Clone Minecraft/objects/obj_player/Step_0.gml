@@ -72,3 +72,41 @@ if (keyboard_check(ord("D")))
     player_x += right_x * move_speed;
     player_z += right_z * move_speed;
 }
+
+// ========================================
+// GRAVIDADE
+// ========================================
+
+vertical_velocity -= gravity;
+
+player_y += vertical_velocity;
+
+
+// ========================================
+// CHÃO TEMPORÁRIO
+// ========================================
+
+if (player_y <= 0)
+{
+    player_y = 0;
+    vertical_velocity = 0;
+    grounded = true;
+}
+else
+{
+    grounded = false;
+}
+
+
+// ========================================
+// PULO
+// ========================================
+
+if (keyboard_check(vk_space))
+{
+    if (grounded)
+    {
+        vertical_velocity = jump_force;
+        grounded = false;
+    }
+}
