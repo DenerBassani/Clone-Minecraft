@@ -2,9 +2,9 @@
 // PLAYER
 // ========================================
 
-player_x = 0;
-player_y = 0;
-player_z = -5;
+player_x = 4;
+player_y = 15;
+player_z = 4;
 
 
 // ========================================
@@ -47,10 +47,10 @@ window_mouse_set(
 // FÍSICA VERTICAL
 // ========================================
 
+player_height = 1.7;
+player_radius = 0.30;
+
 vertical_velocity = 0;
-
 gravity = 0.01;
-
 jump_force = 0.18;
-
 grounded = false;

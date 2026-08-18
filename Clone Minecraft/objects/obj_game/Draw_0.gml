@@ -6,7 +6,7 @@ matrix_set(
 );
 
 vertex_submit(
-    global.cube_buffer,
+    global.world_buffer,
     pr_trianglelist,
     -1
 );

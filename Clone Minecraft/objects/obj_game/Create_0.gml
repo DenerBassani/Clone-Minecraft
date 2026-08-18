@@ -31,6 +31,16 @@ global.vertex_format = vertex_format_end();
 
 global.triangle_buffer = vertex_create_buffer();
 
+// ========================================
+// INICIALIZAR BLOCOS
+// ========================================
+
+blocks_init()
+world_init()
+
+global.world_buffer = -1;
+
+world_build_mesh();
 
 // ========================================
 // CRIAR CUBO
