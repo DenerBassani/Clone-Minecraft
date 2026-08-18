@@ -460,19 +460,37 @@ if (keyboard_check_pressed(vk_space))
 target_block_found = false;
 
 
-// Direção completa da câmera
+// ========================================
+// DIREÇÃO DO OLHAR
+// ========================================
+
 var look_x = dcos(pitch) * dcos(yaw);
 var look_y = dsin(pitch);
 var look_z = dcos(pitch) * dsin(yaw);
 
 
-// Posição inicial do raio
+// ========================================
+// POSIÇÃO INICIAL DO RAIO
+// ========================================
+
 var ray_x = player_x;
 var ray_y = player_y;
 var ray_z = player_z;
 
 
-// Avançar pelo raio
+// ========================================
+// ÚLTIMO BLOCO VAZIO
+// ========================================
+
+var previous_x = floor(ray_x);
+var previous_y = floor(ray_y);
+var previous_z = floor(ray_z);
+
+
+// ========================================
+// PERCORRER O RAIO
+// ========================================
+
 for (var dist = 0; dist <= ray_distance; dist += ray_step)
 {
     var bx = floor(ray_x);
@@ -480,7 +498,10 @@ for (var dist = 0; dist <= ray_distance; dist += ray_step)
     var bz = floor(ray_z);
 
 
-    // Encontrou um bloco sólido?
+    // ========================================
+    // ENCONTROU BLOCO
+    // ========================================
+
     if (world_get(bx, by, bz) != 0)
     {
         target_block_found = true;
@@ -489,16 +510,33 @@ for (var dist = 0; dist <= ray_distance; dist += ray_step)
         target_block_y = by;
         target_block_z = bz;
 
+
+        // Espaço vazio imediatamente anterior
+        place_block_x = previous_x;
+        place_block_y = previous_y;
+        place_block_z = previous_z;
+
         break;
     }
 
 
-    // Continuar o raio
+    // ========================================
+    // GUARDAR ÚLTIMA POSIÇÃO VAZIA
+    // ========================================
+
+    previous_x = bx;
+    previous_y = by;
+    previous_z = bz;
+
+
+    // ========================================
+    // AVANÇAR RAIO
+    // ========================================
+
     ray_x += look_x * ray_step;
     ray_y += look_y * ray_step;
     ray_z += look_z * ray_step;
 }
-
 // ========================================
 // QUEBRAR BLOCO
 // ========================================
@@ -516,4 +554,103 @@ if (mouse_check_button_pressed(mb_left))
 
         world_build_mesh();
     }
+}
+
+// ========================================
+// COLOCAR BLOCO
+// ========================================
+
+if (mouse_check_button_pressed(mb_right))
+{
+    if (target_block_found)
+    {
+        var can_place = true;
+
+
+        // ========================================
+        // HITBOX DO PLAYER
+        // ========================================
+
+        var player_min_x = player_x - player_radius;
+        var player_max_x = player_x + player_radius;
+
+        var player_min_y = player_y - player_height;
+        var player_max_y = player_y;
+
+        var player_min_z = player_z - player_radius;
+        var player_max_z = player_z + player_radius;
+
+
+        // ========================================
+        // HITBOX DO NOVO BLOCO
+        // ========================================
+
+        var block_min_x = place_block_x;
+        var block_max_x = place_block_x + 1;
+
+        var block_min_y = place_block_y;
+        var block_max_y = place_block_y + 1;
+
+        var block_min_z = place_block_z;
+        var block_max_z = place_block_z + 1;
+
+
+        // ========================================
+        // TESTAR SOBREPOSIÇÃO
+        // ========================================
+
+        if (
+            player_max_x > block_min_x &&
+            player_min_x < block_max_x &&
+
+            player_max_y > block_min_y &&
+            player_min_y < block_max_y &&
+
+            player_max_z > block_min_z &&
+            player_min_z < block_max_z
+        )
+        {
+            can_place = false;
+        }
+
+
+        // ========================================
+        // COLOCAR
+        // ========================================
+
+        if (can_place)
+        {
+            if (world_set(
+                place_block_x,
+                place_block_y,
+                place_block_z,
+                selected_block
+            ))
+            {
+                world_build_mesh();
+            }
+        }
+    }
+}
+
+// ========================================
+// HOTBAR - SELEÇÃO
+// ========================================
+
+if (keyboard_check_pressed(ord("1")))
+{
+    selected_slot = 0;
+    selected_block = 1;
+}
+
+if (keyboard_check_pressed(ord("2")))
+{
+    selected_slot = 1;
+    selected_block = 2;
+}
+
+if (keyboard_check_pressed(ord("3")))
+{
+    selected_slot = 2;
+    selected_block = 3;
 }

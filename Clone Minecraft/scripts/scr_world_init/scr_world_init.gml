@@ -5,7 +5,7 @@ function world_init()
     // ========================================
 
     global.world_size_x = 8;
-    global.world_size_y = 4;
+    global.world_size_y = 10;
     global.world_size_z = 8;
 
 

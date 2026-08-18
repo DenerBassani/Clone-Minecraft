@@ -61,5 +61,16 @@ target_block_x = -1;
 target_block_y = -1;
 target_block_z = -1;
 
+place_block_x = -1;
+place_block_y = -1;
+place_block_z = -1;
+
 ray_distance = 5;
 ray_step = 0.05;
+
+// ========================================
+// HUD INVENTARIO
+// ========================================
+
+selected_block = 1;
+selected_slot = 0;

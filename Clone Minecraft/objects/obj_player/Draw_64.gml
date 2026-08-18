@@ -51,6 +51,115 @@ draw_line(
     cy + crosshair_gap + crosshair_size
 );
 
+// ========================================
+// HOTBAR
+// ========================================
+
+var gui_w = display_get_gui_width();
+var gui_h = display_get_gui_height();
+
+var slot_size = 44;
+var slot_gap = 4;
+var slot_count = 9;
+
+var total_width =
+    (slot_size * slot_count)
+    + (slot_gap * (slot_count - 1));
+
+var hotbar_x = (gui_w - total_width) * 0.5;
+var hotbar_y = gui_h - slot_size - 20;
+
+
+// ========================================
+// DESENHAR SLOTS
+// ========================================
+
+for (var i = 0; i < slot_count; i++)
+{
+    var sx =
+        hotbar_x
+        + i * (slot_size + slot_gap);
+
+    var sy = hotbar_y;
+
+
+    // Fundo
+    draw_set_alpha(0.65);
+    draw_set_colour(c_black);
+
+    draw_rectangle(
+        sx,
+        sy,
+        sx + slot_size,
+        sy + slot_size,
+        false
+    );
+
+
+    // Borda
+    draw_set_alpha(1);
+
+    if (i == selected_slot)
+    {
+        draw_set_colour(c_white);
+    }
+    else
+    {
+        draw_set_colour(c_gray);
+    }
+
+    draw_rectangle(
+        sx,
+        sy,
+        sx + slot_size,
+        sy + slot_size,
+        true
+    );
+
+
+    // Número do slot
+    draw_set_colour(c_white);
+
+    draw_text(
+        sx + 4,
+        sy + 3,
+        string(i + 1)
+    );
+}
+
+
+// ========================================
+// NOMES DOS 3 PRIMEIROS BLOCOS
+// ========================================
+
+draw_set_colour(c_white);
+
+draw_text(
+    hotbar_x + 5,
+    hotbar_y + 22,
+    "G"
+);
+
+draw_text(
+    hotbar_x + slot_size + slot_gap + 5,
+    hotbar_y + 22,
+    "T"
+);
+
+draw_text(
+    hotbar_x + (slot_size + slot_gap) * 2 + 5,
+    hotbar_y + 22,
+    "P"
+);
+
+
+// ========================================
+// RESET DE DRAW
+// ========================================
+
+draw_set_alpha(1);
+draw_set_colour(c_white);
+
 
 // ========================================
 // DEBUG DO BLOCO MIRADO
@@ -79,3 +188,30 @@ else
         "Nenhum bloco"
     );
 }
+
+// ========================================
+// NOME DO BLOCO SELECIONADO
+// ========================================
+
+var selected_name = "";
+
+if (selected_block == 1)
+{
+    selected_name = "Grama";
+}
+else if (selected_block == 2)
+{
+    selected_name = "Terra";
+}
+else if (selected_block == 3)
+{
+    selected_name = "Pedra";
+}
+
+draw_set_colour(c_white);
+
+draw_text(
+    gui_w * 0.5 - 40,
+    hotbar_y - 22,
+    selected_name
+);
