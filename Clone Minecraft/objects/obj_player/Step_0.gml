@@ -452,3 +452,68 @@ if (keyboard_check_pressed(vk_space))
         grounded = false;
     }
 }
+
+// ========================================
+// RAYCAST - BLOCO MIRADO
+// ========================================
+
+target_block_found = false;
+
+
+// Direção completa da câmera
+var look_x = dcos(pitch) * dcos(yaw);
+var look_y = dsin(pitch);
+var look_z = dcos(pitch) * dsin(yaw);
+
+
+// Posição inicial do raio
+var ray_x = player_x;
+var ray_y = player_y;
+var ray_z = player_z;
+
+
+// Avançar pelo raio
+for (var dist = 0; dist <= ray_distance; dist += ray_step)
+{
+    var bx = floor(ray_x);
+    var by = floor(ray_y);
+    var bz = floor(ray_z);
+
+
+    // Encontrou um bloco sólido?
+    if (world_get(bx, by, bz) != 0)
+    {
+        target_block_found = true;
+
+        target_block_x = bx;
+        target_block_y = by;
+        target_block_z = bz;
+
+        break;
+    }
+
+
+    // Continuar o raio
+    ray_x += look_x * ray_step;
+    ray_y += look_y * ray_step;
+    ray_z += look_z * ray_step;
+}
+
+// ========================================
+// QUEBRAR BLOCO
+// ========================================
+
+if (mouse_check_button_pressed(mb_left))
+{
+    if (target_block_found)
+    {
+        world_set(
+            target_block_x,
+            target_block_y,
+            target_block_z,
+            0
+        );
+
+        world_build_mesh();
+    }
+}

@@ -33,6 +33,7 @@
     {"id":{"name":"scr_world_get","path":"scripts/scr_world_get/scr_world_get.yy",},},
     {"id":{"name":"scr_world_init","path":"scripts/scr_world_init/scr_world_init.yy",},},
     {"id":{"name":"scr_world_mesh","path":"scripts/scr_world_mesh/scr_world_mesh.yy",},},
+    {"id":{"name":"scr_world_set","path":"scripts/scr_world_set/scr_world_set.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

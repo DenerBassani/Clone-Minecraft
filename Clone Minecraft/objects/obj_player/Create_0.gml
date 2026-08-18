@@ -54,3 +54,12 @@ vertical_velocity = 0;
 gravity = 0.01;
 jump_force = 0.18;
 grounded = false;
+
+target_block_found = false;
+
+target_block_x = -1;
+target_block_y = -1;
+target_block_z = -1;
+
+ray_distance = 5;
+ray_step = 0.05;
